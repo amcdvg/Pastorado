@@ -1,0 +1,703 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+        <title>Formulario Completo de Hoja de Vida</title>
+        <style>
+            :root {
+                --primary-color: #2c3e50;
+                --secondary-color: #3498db;
+                --background: #f8f9fa;
+            }
+    
+            body {
+                font-family: 'Arial', sans-serif;
+                line-height: 1.6;
+                margin: 10px;
+                background: var(--background);
+                font-size: 14px;
+            }
+    
+            .container {
+                width: 100%;
+                margin: 0 auto;
+                background: white;
+                padding: 15px;
+                border-radius: 8px;
+                box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            }
+    
+            h1, h2 {
+                font-size: 1.4em;
+                color: var(--primary-color);
+                border-bottom: 2px solid var(--secondary-color);
+                padding-bottom: 8px;
+                margin: 15px 0;
+            }
+    
+            .form-section {
+                margin: 15px 0;
+                padding: 10px;
+                border: 1px solid #ddd;
+                border-radius: 6px;
+            }
+    
+            .two-columns {
+                display: grid;
+                grid-template-columns: 1fr;
+                gap: 10px;
+            }
+    
+            .photo-upload {
+                border: 2px dashed #ddd;
+                padding: 10px;
+                text-align: center;
+                cursor: pointer;
+                margin: 8px 0;
+                font-size: 0.9em;
+            }
+    
+            .photo-preview {
+                max-width: 120px;
+                display: none;
+                margin: 10px auto;
+            }
+    
+            input, select, textarea {
+                width: 100%;
+                padding: 8px;
+                margin: 5px 0;
+                border: 1px solid #ddd;
+                border-radius: 4px;
+                font-size: 0.95em;
+            }
+    
+            .checkbox-group {
+                margin: 8px 0;
+                display: flex;
+                flex-wrap: wrap;
+                gap: 10px;
+            }
+            
+            .checkbox-group label {
+                display: flex;
+                align-items: center;
+                gap: 5px;
+                white-space: nowrap;
+            }
+    
+            button {
+                background: var(--secondary-color);
+                color: white;
+                padding: 12px;
+                border: none;
+                border-radius: 5px;
+                cursor: pointer;
+                font-size: 1em;
+                margin: 15px 0;
+                width: 100%;
+            }
+    
+            .hidden {
+                display: none;
+            }
+    
+            .spouse-section {
+                border: 2px solid var(--secondary-color);
+                padding: 15px;
+                border-radius: 6px;
+                margin-top: 10px;
+            }
+    
+            @media (min-width: 480px) {
+                .two-columns {
+                    grid-template-columns: 1fr 1fr;
+                    gap: 15px;
+                }
+                
+                body {
+                    font-size: 15px;
+                }
+                
+                .container {
+                    padding: 20px;
+                    max-width: 800px;
+                }
+                
+                h1, h2 {
+                    font-size: 1.6em;
+                }
+            }
+        </style>
+    </head>
+<body>
+    <div class="container">
+    
+        <h1>FORMATO HOJA DE VIDA</h1>
+        
+        <!-- Sección Lugar y Fecha -->
+        <div class="form-section">
+            <div class="two-columns">
+                <div>
+                    <label>Lugar: <input type="text" value="Pereira, Risaralda" readonly></label>
+                </div>
+                <div>
+                    <label>Fecha: <input type="date" id="fecha" required></label>
+                </div>
+            </div>
+        </div>
+
+        <!-- Datos del Hermano -->
+        
+        <div class="form-section">
+            <h2>DATOS DEL HERMANO</h2>
+            <div class="two-columns">
+                <div>
+                    <div class="photo-upload" onclick="document.getElementById('foto-hermano').click()">
+                        <span>⬆️ Subir foto</span>
+                        <img id="preview-hermano" class="photo-preview">
+                    </div>
+                    <input type="file" id="foto-hermano" hidden accept="image/*">
+                </div>
+                <div>
+                    <label>Nombres y apellidos: <input type="text" id="nombre-hermano" required></label>
+                    <label>Documento de identidad: <input type="text" id="doc-hermano" required></label>
+                    <label>Nacionalidad: <input type="text" id="nacionalidad-hermano" value="Colombiano" required></label>
+                    <label>Edad: <input type="number" id="edad-hermano" required></label>
+                </div>
+            </div>
+        </div>
+
+        
+
+        <!-- Datos Espirituales -->
+        <div class="form-section">
+            <h3>DATOS ESPIRITUALES</h3>
+            <div class="two-columns">
+                <div>
+                    <label>¿Hace cuánto recibió el bautismo con el Espíritu Santo? <input type="text" id="bautismo-espiritu"></label>
+                    <label>Año en que llegó a la iglesia: <input type="number" id="ano-iglesia"></label>
+                </div>
+                <div>
+                    <div class="checkbox-group">
+                        <label>¿Tiene el Don de la Profecía?</label>
+                        <label><input type="radio" name="profecia" value="si"> Sí </label>
+                        <label><input type="radio" name="profecia" value="no"> No</label>
+                    </div>
+                    <label>Hace cuánto: <input type="text" id="tiempo-profecia"></label>
+                </div>
+            </div>
+            <div class="two-columns">
+                <div>
+                    <label>¿Cuántas veces ha leído la Biblia? <input type="text" id="lectura-biblia"></label>
+                    
+                </div>
+                <div>
+                    <div class="checkbox-group">
+                        <label>¿Ha estado en el Instituto Bíblico?</label>
+                        <label><input type="radio" name="instituto-biblico" value="si" onclick="toggleOpciones(true)"> Sí </label>
+                        <label><input type="radio" name="instituto-biblico" value="no" onclick="toggleOpciones(false)"> No</label>
+                    </div>
+                    <div id="opciones-adicionales" style="display: none;">
+                        <div class="checkbox-group">
+                            <label>¿Cómo asistió?</label>
+                            <label><input type="radio" name="instituto-biblico-t" value="Presencial"> Presencial </label>
+                            <label><input type="radio" name="instituto-biblico-t" value="Audio"> Audio</label>
+                        </div>
+                    </div>
+                    
+                </div>
+                <div>
+                    <div class="checkbox-group">
+                        <label>¿Ha leído el libro de vivencias?</label>
+                        <label><input type="radio" name="vivencia" value="si"> Sí </label>
+                        <label><input type="radio" name="vivencia" value="no"> No</label>
+                    </div>
+                   
+                    
+                </div>
+            </div>
+            <label>Actividades en la Iglesia: <textarea id="actividades-iglesia" rows="3"></textarea></label>
+        </div>
+
+        <!-- Estado Civil y Familia -->
+        <div class="form-section">
+            <h3>ESTADO CIVIL Y FAMILIA</h3>
+            <div class="two-columns">
+                <div>
+                    <label>Estado civil actual:
+                        <select id="estado-civil" onchange="toggleEsposa()">
+                            <option value="soltero">Soltero</option>
+                            <option value="casado">Casado</option>
+                            <option value="viudo">Viudo</option>
+                            <option value="divorciado">Divorciado</option>
+                        </select>
+                    </label>
+                    <div id="matrimonio-info">
+                        <div class="checkbox-group">
+                            <label>¿Único Matrimonio?</label>
+                            <label><input type="radio" name="matrimonio" value="si"> Sí</label>
+                            <label><input type="radio" name="matrimonio" value="no"> No</label>
+                        </div>
+                        
+                        <label>Tiempo de Casado: <input type="text" id="tiempo-casado"></label>
+                    </div>
+                </div>
+                <div>
+                    <label>Estado civil antes de llegar a la Iglesia:
+                        <select id="estado-civil-anterior">
+                            <option>Soltero</option>
+                            <option>Casado</option>
+                            <option>Viudo</option>
+                            <option>Divorciado</option>
+                        </select>
+                    </label>
+                    <label>Número de hijos relación anterior: <input type="number" id="hijos-anteriores"></label>
+                    <label>Número de hijos matrimonio actual: <input type="number" id="hijos-actuales"></label>
+                    <label>Edades hijos matrimonio actual: <input type="text" id="edades-hijos"></label>
+                </div>
+            </div>
+        </div>
+   
+        <!-- Sección Esposa (Condicional) -->
+        <!-- Dentro de la sección esposa -->
+        <div id="seccion-esposa" class="spouse-section hidden">
+            <h2>DATOS DE LA HERMANA</h2>
+            
+            <!-- Datos Básicos -->
+            <div class="two-columns">
+                <div>
+                    <div class="photo-upload" onclick="document.getElementById('foto-esposa').click()">
+                        <span>⬆️ Subir foto de la esposa</span>
+                        <img id="preview-esposa" class="photo-preview">
+                    </div>
+                    <input type="file" id="foto-esposa" hidden accept="image/*">
+                </div>
+                <div>
+                    <label>Nombres y apellidos: <input type="text" id="nombre-esposa" required></label>
+                    <label>Documento de identidad: <input type="text" id="doc-esposa" required></label>
+                    <label>Edad: <input type="number" id="edad-esposa" required></label>
+                   
+                </div>
+            </div>
+
+            <!-- Datos Espirituales Esposa -->
+            <div class="form-section">
+                <h3>DATOS ESPIRITUALES</h3>
+                <div class="two-columns">
+                    <div>
+                        <label>¿Hace cuánto recibió el bautismo con el Espíritu Santo? 
+                            <input type="text" id="bautismo-espiritu-esposa">
+                        </label>
+                        <label>Año en que llegó a la iglesia: 
+                            <input type="number" id="ano-iglesia-esposa">
+                        </label>
+                    </div>
+                    <div>
+                        <div class="checkbox-group">
+                            <label>¿Tiene el Don de la Profecía?</label>
+                            <label><input type="radio" name="profecia-esposa" value="si"> Sí</label>
+                            <label><input type="radio" name="profecia-esposa" value="no"> No</label>
+                        </div>
+                        
+                        <label>Hace cuánto: 
+                            <input type="text" id="tiempo-profecia-esposa">
+                        </label>
+                    </div>
+                    
+                </div>
+                <div class="two-columns">
+                        <div>
+                            <label>¿Cuántas veces ha leído la Biblia? <input type="text" id="lectura-biblia-esposa"></label>
+                            
+                        </div>
+                        <div>
+                            <div class="checkbox-group">
+                                <label>¿Ha estado en el Instituto Bíblico?</label>
+                                <label><input type="radio" name="instituto-biblico-esposa" value="si" onclick="toggleOpcioneses(true)"> Sí </label>
+                                <label><input type="radio" name="instituto-biblico-esposa" value="no" onclick="toggleOpcioneses(false)"> No</label>
+                            </div>
+                            <div id="opciones-adicionales-esposa" style="display: none;">
+                                <div class="checkbox-group">
+                                    <label>¿Cómo asistió?</label>
+                                    <label><input type="radio" name="instituto-biblico-esposa-t" value="Presencial"> Presencial </label>
+                                    <label><input type="radio" name="instituto-biblico-esposa-t" value="Audio"> Audio</label>
+                                </div>
+                            </div>
+                            
+                        </div>
+                        <div>
+                            <div class="checkbox-group">
+                                <label>¿Ha leído el libro de vivencias?</label>
+                                <label><input type="radio" name="vivencia-esposa" value="si"> Sí </label>
+                                <label><input type="radio" name="vivencia-esposa" value="no"> No</label>
+                            </div>
+                           
+                            
+                        </div>
+                    </div>
+                <label>Actividades en la Iglesia: 
+                    <textarea id="actividades-iglesia-esposa" rows="3"></textarea>
+                </label>
+            </div>
+
+            <!-- Estado Civil y Familia Esposa -->
+            <div class="form-section">
+                <h3>ESTADO CIVIL Y FAMILIA</h3>
+                <div class="two-columns">
+                    <div>
+                        <label>Estado civil actual:
+                            <select id="estado-civil-esposa">
+                                <option>Casada</option>
+                                <option>Soltera</option>
+                                <option>Viuda</option>
+                                <option>Divorciada</option>
+                            </select>
+                        </label>
+                        
+                        <div class="checkbox-group">
+                            <label>¿Único Matrimonio?</label>
+                            <label><input type="radio" name="matrimonio-esposa" value="si"> Sí</label>
+                            <label><input type="radio" name="matrimonio-esposa" value="no"> No</label>
+                        </div>
+                        
+                        <label>Tiempo de Casado: 
+                            <input type="text" id="tiempo-casado-esposa">
+                        </label>
+                    </div>
+                    <div>
+                        <label>Estado civil antes de llegar a la Iglesia:
+                            <select id="estado-civil-anterior-esposa">
+                                <option>Soltera</option>
+                                <option>Casada</option>
+                                <option>Viuda</option>
+                                <option>Divorciada</option>
+                            </select>
+                        </label>
+                        <label>Número de hijos relación anterior: 
+                            <input type="number" id="hijos-anteriores-esposa">
+                        </label>
+                        <label>Número de hijos matrimonio actual: 
+                            <input type="number" id="hijos-actuales-esposa">
+                        </label>
+                        <label>Edades hijos matrimonio actual: 
+                            <input type="text" id="edades-hijos-esposa">
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <button onclick="enviarDatos()">Generar Documento en Drive</button>
+    </div>
+
+    <script>
+
+        function showLoadingSpinner() {
+            const spinner = document.createElement('div');
+            spinner.id = 'loading-spinner';
+            spinner.style.position = 'fixed';
+            spinner.style.top = '0';
+            spinner.style.left = '0';
+            spinner.style.width = '100%';
+            spinner.style.height = '100%';
+            spinner.style.backgroundColor = 'rgba(0, 0, 0, 0.5)';
+            spinner.style.display = 'flex';
+            spinner.style.justifyContent = 'center';
+            spinner.style.alignItems = 'center';
+            spinner.style.zIndex = '1000';
+            spinner.innerHTML = `
+                <div style="width: 50px; height: 50px; border: 5px solid rgba(255, 255, 255, 0.3); border-top: 5px solid white; border-radius: 50%; animation: spin 1s linear infinite;"></div>
+                <style>
+                    @keyframes spin {
+                        from { transform: rotate(0deg); }
+                        to { transform: rotate(360deg); }
+                    }
+                </style>
+            `;
+            document.body.appendChild(spinner);
+        }
+        
+        /**
+         * Función para ocultar la rueda de carga (spinner).
+         */
+        function hideLoadingSpinner() {
+            const spinner = document.getElementById('loading-spinner');
+            if (spinner) {
+                document.body.removeChild(spinner);
+            }
+        }
+
+
+        function toggleOpciones(mostrar) {
+            document.getElementById("opciones-adicionales").style.display = mostrar ? "block" : "none";
+        }
+        function toggleOpcioneses(mostrar) {
+            document.getElementById("opciones-adicionales-esposa").style.display = mostrar ? "block" : "none";
+        }
+        // Función para mostrar/ocultar sección esposa
+        function toggleEsposa() {
+            const estado = document.getElementById('estado-civil').value;
+            const seccionEsposa = document.getElementById('seccion-esposa');
+            const camposEsposa = document.querySelectorAll('#seccion-esposa input, #seccion-esposa select, #seccion-esposa textarea');
+            const esposaInfo = document.getElementById("matrimonio-info");
+            
+            if(estado === 'casado') {
+                esposaInfo.style.display = (estado === "casado") ?  "block": "none" ;
+                seccionEsposa.classList.remove('hidden');
+                camposEsposa.forEach(campo => campo.required = true);
+            } else {
+                
+                esposaInfo.style.display = (estado === "soltero") ? "none" : "block";
+                seccionEsposa.classList.add('hidden');
+                camposEsposa.forEach(campo => campo.required = false);
+                
+                
+            }
+
+            
+        }
+    
+        // Manejo de imágenes
+        function manejarFoto(inputId, previewId) {
+            const input = document.getElementById(inputId);
+            const preview = document.getElementById(previewId);
+            
+            input.addEventListener('change', function(e) {
+                const file = e.target.files[0];
+                if(file && file.type.startsWith('image/')) {
+                    const reader = new FileReader();
+                    reader.onload = function(e) {
+                        preview.src = e.target.result;
+                        preview.style.display = 'block';
+                    }
+                    reader.readAsDataURL(file);
+                } else {
+                    preview.style.display = 'none';
+                    alert('Por favor selecciona un archivo de imagen válido (JPG/PNG)');
+                }
+            });
+        }
+    
+        // Inicializar subida de fotos
+        manejarFoto('foto-hermano', 'preview-hermano');
+        manejarFoto('foto-esposa', 'preview-esposa');
+    
+        // Función para convertir imagen a Base64
+        async function convertirImagen(file) {
+            return new Promise((resolve, reject) => {
+                const reader = new FileReader();
+                reader.readAsDataURL(file);
+                reader.onload = () => resolve(reader.result.split(',')[1]);
+                reader.onerror = error => reject(error);
+            });
+        }
+    
+        // Función para limpiar formulario
+        function limpiarFormulario() {
+            document.querySelectorAll('input, textarea, select').forEach(element => {
+                if(element.id !== 'nacionalidad-hermano') {
+                    element.value = '';
+                    if(element.type === 'radio' || element.type === 'checkbox') {
+                        element.checked = false;
+                    }
+                }
+            });
+            document.querySelectorAll('.photo-preview').forEach(img => {
+                img.style.display = 'none';
+            });
+            document.getElementById('seccion-esposa').classList.add('hidden');
+        }
+        async function subirImagen(file, nombrePersona, tipoPersona) {
+            if (!file) return null;
+            
+            try {
+                // Generar nombre único: [tipo]_[nombre]_[timestamp].[ext]
+                let url = 'https://script.google.com/macros/s/AKfycbyN5fhAkNoQElDCdeha_fzF6K1T5pH1kowVMy4PmHYMk-tsnDR0AJR1-NRS5oqqLLtg/exec'
+                
+                const extension = file.name.split('.').pop();
+                const nombreArchivo = `${tipoPersona}_${nombrePersona.replace(/ /g, '_')}_${Date.now()}.${extension}`;
+        
+                // Convertir imagen a ArrayBuffer
+                const buffer = await file.arrayBuffer();
+        
+                // Configurar parámetros de la solicitud
+                const params = new URLSearchParams({
+                    filename: nombreArchivo,
+                    mimeType: file.type
+                });
+        
+                // Subir imagen al Google Script
+                const respuesta = await fetch(`${url}?${params}`, {
+                    method: 'POST',
+                    body: JSON.stringify([...new Int8Array(buffer)]),
+                });
+        
+                if (!respuesta.ok) throw new Error('Error subiendo imagen');
+                
+                // Obtener URL de la imagen subida
+                const datos = await respuesta.json();
+                return datos.url;
+        
+            } catch (error) {
+                console.error('Error subiendo imagen:', error);
+                throw error;
+            }
+        }
+        // Función principal para enviar datos
+        async function enviarDatos() {
+            try {
+                // Validar campos obligatorios del hermano
+                if(!document.getElementById('nombre-hermano').value.trim() || 
+                   !document.getElementById('doc-hermano').value.trim() || 
+                   !document.getElementById('fecha').value) {
+                    throw new Error('Los campos requeridos del hermano deben estar completos');
+                }
+    
+                // Recopilar datos del hermano
+                const formData = {
+                    fecha: document.getElementById('fecha').value,
+                    hermano: {
+                        // Datos básicos
+                        nombre: document.getElementById('nombre-hermano').value.trim(),
+                        documento: document.getElementById('doc-hermano').value.trim(),
+                        nacionalidad: document.getElementById('nacionalidad-hermano').value,
+                        edad: document.getElementById('edad-hermano').value,
+                        foto: document.getElementById('foto-hermano').files[0] ? 
+                        await convertirImagen(document.getElementById('foto-hermano').files[0]) : null,
+                        
+                        // Datos espirituales
+                        bautismoEspiritu: document.getElementById('bautismo-espiritu').value.trim(),
+                        anoIglesia: document.getElementById('ano-iglesia').value,
+                        donProfecia: document.querySelector('input[name="profecia"]:checked')?.value,
+                        tiempoProfecia: document.getElementById('tiempo-profecia').value.trim(),
+                        actividadesIglesia: document.getElementById('actividades-iglesia').value.trim(),
+                        lecturaBiblia: document.getElementById('lectura-biblia').value.trim(),
+                        institutoBiblico: document.querySelector('input[name="instituto-biblico"]:checked')?.value,
+                        institutoBiblicoAsistencia: document.querySelector('input[name="instituto-biblico"]:checked')?.value === "si"
+                        ? document.querySelector('input[name="instituto-biblico-t"]:checked')?.value || "No especificado"
+                        : "" ,
+                        vivencias: document.querySelector('input[name="vivencia"]:checked')?.value,
+                        //lecturaBiblia: document.getElementById('lectura-biblia').value.trim(),
+                        //institutoBiblico: document.querySelector('input[name="instituto-biblico"]:checked')?.value,
+                        //vivencias: document.querySelector('input[name="vivencia"]:checked')?.value,
+                        
+                        // Estado civil y familia
+                        estadoCivil: document.getElementById('estado-civil').value,
+                        unicoMatrimonio: document.querySelector('input[name="matrimonio"]:checked')?.value || "",
+                        tiempoCasado: document.getElementById('tiempo-casado').value.trim(),
+                        estadoCivilAnterior: document.getElementById('estado-civil-anterior').value,
+                        hijosAnteriores: document.getElementById('hijos-anteriores').value || 0,
+                        hijosActuales: document.getElementById('hijos-actuales').value || 0,
+                        edadesHijos: document.getElementById('edades-hijos').value.trim()
+                    },
+                    esposa: null
+                };
+    
+                // Validar y recopilar datos de la esposa si es casado
+                if(formData.hermano.estadoCivil === 'casado') {
+                    let estaCasado = true
+                    // Validar campos obligatorios de la esposa
+                    if(!document.getElementById('nombre-esposa').value.trim() || 
+                       !document.getElementById('doc-esposa').value.trim()) {
+                        throw new Error('Los campos requeridos de la esposa deben estar completos');
+                    }
+    
+                    formData.esposa = {
+                        // Datos básicos
+                        nombre: document.getElementById('nombre-esposa').value.trim(),
+                        documento: document.getElementById('doc-esposa').value.trim(),
+                        edad: document.getElementById('edad-esposa').value,
+                        foto: document.getElementById('foto-esposa').files[0] ? 
+                            await convertirImagen(document.getElementById('foto-esposa').files[0]) : null,
+                        
+                        // Datos espirituales
+                        bautismoEspiritu: document.getElementById('bautismo-espiritu-esposa').value.trim(),
+                        anoIglesia: document.getElementById('ano-iglesia-esposa').value,
+                        donProfecia: document.querySelector('input[name="profecia-esposa"]:checked')?.value,
+                        tiempoProfecia: document.getElementById('tiempo-profecia-esposa').value.trim(),
+                        actividadesIglesia: document.getElementById('actividades-iglesia-esposa').value.trim(),
+                        lecturaBiblia: document.getElementById('lectura-biblia-esposa').value.trim(),
+                        institutoBiblico: document.querySelector('input[name="instituto-biblico-esposa"]:checked')?.value,
+                        institutoBiblicoAsistencia: document.querySelector('input[name="instituto-biblico-esposa"]:checked')?.value === "si"
+                        ? document.querySelector('input[name="instituto-biblico-esposa-t"]:checked')?.value || "No especificado"
+                        : "",
+                        vivencias: document.querySelector('input[name="vivencia-esposa"]:checked')?.value,
+                        //lecturaBiblia: document.getElementById('lectura-biblia-esposa').value.trim(),
+                        //institutoBiblico: document.querySelector('input[name="Instituto-Bíblico-esposa"]:checked')?.value,
+                        //vivencias: document.querySelector('input[name="vivencia-esposa"]:checked')?.value,
+                        
+                        // Estado civil y familia
+                        estadoCivil: document.getElementById('estado-civil-esposa').value,
+                        unicoMatrimonio: document.querySelector('input[name="matrimonio-esposa"]:checked')?.value,
+                        tiempoCasado: document.getElementById('tiempo-casado-esposa').value.trim(),
+                        estadoCivilAnterior: document.getElementById('estado-civil-anterior-esposa').value,
+                        hijosAnteriores: document.getElementById('hijos-anteriores-esposa').value || 0,
+                        hijosActuales: document.getElementById('hijos-actuales-esposa').value || 0,
+                        edadesHijos: document.getElementById('edades-hijos-esposa').value.trim()
+                    };
+                } else{let estaCasado = false}
+                let url = 'https://script.google.com/macros/s/AKfycbyN5fhAkNoQElDCdeha_fzF6K1T5pH1kowVMy4PmHYMk-tsnDR0AJR1-NRS5oqqLLtg/exec'
+                // Subir imágenes en paralelo
+                console.log(JSON.stringify(formData))
+                /*const [fotoHermano, fotoEsposa] = await Promise.all([
+                subirImagen(
+                    document.getElementById('foto-hermano').files[0],
+                    document.getElementById('nombre-hermano').value.trim(),
+                    'hermano' // Tipo de persona
+                ),
+                estaCasado ? subirImagen(
+                    document.getElementById('foto-esposa').files[0],
+                    document.getElementById('nombre-esposa').value.trim(),
+                    'esposa' // Tipo de persona
+                ) : null
+                ]);*/
+
+                showLoadingSpinner();
+                // Enviar datos a Google Apps Script
+                const response = await fetch(url, {
+                    method: 'POST',
+                    mode: "no-cors",
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify(formData),
+                    
+                });
+                console.log(response)
+                console.log(JSON.stringify(formData))
+                if (!response.ok) {
+                    //throw new Error(`Error HTTP: ${response.status} ${response.statusText}`);
+                    
+                    alert('✅ Documento creado exitosamente en Drive\n' );
+                    limpiarFormulario();
+                    hideLoadingSpinner()
+                }else{
+                    
+                    alert('✅ Documento creado exitosamente en Drive\n' );
+                    limpiarFormulario();
+                    hideLoadingSpinner()
+                }
+
+                
+
+    
+                /*const resultado = await response.json();
+                
+                if(resultado.exito) {
+                    alert('✅ Documento creado exitosamente en Drive:\n' + resultado.url);
+                    limpiarFormulario();
+                } else {
+                    throw new Error(resultado.error || 'Error desconocido del servidor');
+                }*/
+            } catch (error) {
+                //alert('✅ Documento creado exitosamente en Drive\n' );
+                limpiarFormulario();
+                hideLoadingSpinner()
+                //alert(`❌ Error: ${error.message}`);
+                //console.error('Error detallado:', error);
+            }
+        }
+    document.addEventListener("DOMContentLoaded", toggleEsposa);
+    </script>
+</body>
+</html>
