@@ -182,10 +182,12 @@
                 <div>
                     <div class="checkbox-group">
                         <label>¿Tiene el Don de la Profecía?</label>
-                        <label><input type="radio" name="profecia" value="si"> Sí </label>
-                        <label><input type="radio" name="profecia" value="no"> No</label>
+                        <label><input type="radio" name="profecia" value="si" onclick="toggleOpcionesP(true)"> Sí </label>
+                        <label><input type="radio" name="profecia" value="no" onclick="toggleOpcionesP(false)"> No</label>
                     </div>
-                    <label>Hace cuánto: <input type="text" id="tiempo-profecia"></label>
+                    <div id="opciones-adicionales-profecia" style="display: none;">
+                         <label>Hace cuánto: <input type="text" id="tiempo-profecia"></label>
+                    </div>
                 </div>
             </div>
             <div class="two-columns">
@@ -297,13 +299,14 @@
                     <div>
                         <div class="checkbox-group">
                             <label>¿Tiene el Don de la Profecía?</label>
-                            <label><input type="radio" name="profecia-esposa" value="si"> Sí</label>
-                            <label><input type="radio" name="profecia-esposa" value="no"> No</label>
+                            <label><input type="radio" name="profecia-esposa" value="si" onclick="toggleOpcionesPes(true)"> Sí</label>
+                            <label><input type="radio" name="profecia-esposa" value="no" onclick="toggleOpcionesPes(false)"> No</label>
                         </div>
-                        
-                        <label>Hace cuánto: 
-                            <input type="text" id="tiempo-profecia-esposa">
-                        </label>
+                        <div id="opciones-adicionales-profecia-esposa" style="display: none;">
+                            <label>Hace cuánto: 
+                                <input type="text" id="tiempo-profecia-esposa">
+                            </label>
+                        </div>
                     </div>
                     
                 </div>
@@ -432,6 +435,12 @@
 
         function toggleOpciones(mostrar) {
             document.getElementById("opciones-adicionales").style.display = mostrar ? "block" : "none";
+        }
+        function toggleOpcionesP(mostrar) {
+            document.getElementById("opciones-adicionales-profecia").style.display = mostrar ? "block" : "none";
+        }
+        function toggleOpcionesPes(mostrar) {
+            document.getElementById("opciones-adicionales-profecia-esposa").style.display = mostrar ? "block" : "none";
         }
         function toggleOpcioneses(mostrar) {
             document.getElementById("opciones-adicionales-esposa").style.display = mostrar ? "block" : "none";
